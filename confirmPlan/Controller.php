@@ -2,10 +2,14 @@
 
 require_once('Model.php');
 
+echo 'your account? normal/premium :';
+
+$inputAcount = trim(fgets(STDIN));
+
 echo 'plan? small/normal/large :';
 
-$inputData = trim(fgets(STDIN));
+$inputPLan = trim(fgets(STDIN));
 
 $model = new Model;
 
-echo $model->getPlanDetail($inputData);
+echo $model->getPlanDetail($inputAcount, $inputPLan);

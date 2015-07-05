@@ -4,6 +4,7 @@ require_once('planDetail.php');
 
 class Model
 {
+    private $accounts = ['premium', 'normal'];
 
     private $plans = [
         'small' => [
@@ -23,15 +24,17 @@ class Model
     ];
 
     /**
+     * @param string $inputAccount
      * @param string $inputPlanName
      * @return string
      */
-    public function getPlanDetail($inputPlanName)
+    public function getPlanDetail($inputAccount, $inputPlanName)
     {
         $plans = $this->plans;
+        $accounts = $this->accounts;
 
-        $planDitail = new planDetail($plans, $inputPlanName);
+        $planDetail = new planDetail($accounts, $inputAccount, $plans, $inputPlanName);
 
-        return $planDitail->planDetail($plans, $inputPlanName);
+        return $planDetail->planDetail($accounts, $inputAccount, $plans, $inputPlanName);
     }
 }
