@@ -2,6 +2,7 @@
 
 require_once('PlanDetail.php');
 require_once('MembersInformation.php');
+require_once('ChangePlanDetail.php');
 
 class Model
 {
@@ -40,8 +41,19 @@ class Model
         $plans = $this->plans;
         $accounts = $this->accounts;
 
-        return new PlanDetail($accounts, $inputAccount, $plans, $inputPlanName);
+        $planDetail = new PlanDetail($accounts, $inputAccount, $plans, $inputPlanName);
 
+        return $planDetail->planDetail($accounts, $inputAccount, $plans, $inputPlanName);
+    }
+
+    public function getChangePlanDetail($inputAccount, $inputPlanName, $inputChangePlan)
+    {
+        $plans = $this->plans;
+        $accounts = $this->accounts;
+
+        $changePlanDetail = new ChangePlanDetail($accounts, $inputAccount, $plans, $inputPlanName, $inputChangePlan);
+
+        return $changePlanDetail->changePlanDetail($accounts, $inputAccount, $plans, $inputPlanName, $inputChangePlan);
     }
 
     public function getMembersInformation($inputAccount)
