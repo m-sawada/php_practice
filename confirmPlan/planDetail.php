@@ -1,6 +1,6 @@
 <?php
 
-class planDetail
+class PlanDetail
 {
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
-require_once('planDetail.php');
+require_once('PlanDetail.php');
+require_once('MembersInformation.php');
 
 class Model
 {
@@ -39,8 +40,12 @@ class Model
         $plans = $this->plans;
         $accounts = $this->accounts;
 
-        $planDetail = new planDetail($accounts, $inputAccount, $plans, $inputPlanName);
+        return new PlanDetail($accounts, $inputAccount, $plans, $inputPlanName);
 
-        return $planDetail->planDetail($accounts, $inputAccount, $plans, $inputPlanName);
+    }
+
+    public function getMembersInformation($inputAccount)
+    {
+        return new MembersInformation($inputAccount);
     }
 }
