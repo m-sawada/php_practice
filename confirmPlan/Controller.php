@@ -1,7 +1,11 @@
 <?php
 
+require_once('Model.php');
+
 echo 'plan? small/normal/large :';
 
 $inputData = trim(fgets(STDIN));
 
-echo '入力されたプランの詳細';
+$model = new Model;
+
+echo $model->getPlanDetail($inputData);
