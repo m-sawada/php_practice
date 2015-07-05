@@ -8,8 +8,8 @@ $inputAcount = trim(fgets(STDIN));
 
 echo 'plan? small/normal/large :';
 
-$inputPLan = trim(fgets(STDIN));
+$inputPlan = trim(fgets(STDIN));
 
 $model = new Model;
 
-echo $model->getPlanDetail($inputAcount, $inputPLan);
+echo $model->getPlanDetail($inputAcount, $inputPlan);
