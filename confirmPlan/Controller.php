@@ -2,6 +2,6 @@
 
 echo 'plan? small/normal/large :';
 
-$inputData = fgets(STDIN);
+$inputData = trim(fgets(STDIN));
 
 echo '入力されたプランの詳細';
