@@ -20,7 +20,13 @@ class Model
         'large' => [
             'course_name_japanese' => 'ラージプラン',
             'price' => '7000',
-            'capacity' => '5GB']
+            'capacity' => '5GB'
+        ],
+        'mega' => [
+            'course_name_japanese' => 'メガプラン',
+            'price' => '8000',
+            'capacity' => '7GB'
+        ]
     ];
 
     /**
