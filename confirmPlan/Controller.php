@@ -19,6 +19,5 @@ $model = new Model;
 
 $getMembersInformation = $model->getMembersInformation($inputAccount);
 
-// $model->getPlanDetail($inputAccount, $inputPlan);
 echo $getMembersInformation->memberInformation($inputAccount);
 echo $model->getChangePlanDetail($inputAccount, $inputPlan, $inputChangePlan);

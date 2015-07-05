@@ -18,6 +18,15 @@ class ChangePlanDetail
         if ($this->isValidMegaPlan($inputAccount, $inputPlanName, $inputNextPlan)){
             return 'メガプランはプレミアム会員のみです';
         }
+        if ($this->isValidSmallPlan($inputNextPlan)) {
+            return " $inputPlanName からスモールプランへの変更は不可能です。";
+        }
+        if ($this->isValidSamePlan($inputPlanName, $inputNextPlan)) {
+            return " $inputPlanName から $inputNextPlan への変更は不可能です。";
+        }
+        if ($this->isValidMegaplanToNormalPlan($inputPlanName, $inputNextPlan)){
+            return "メガプランからノーマルプランへの変更は不可能です。";
+        }
 
         $current_course_name_japanese = $plans[$inputPlanName]['course_name_japanese'];
         $next_course_name_japanese = $plans[$inputNextPlan]['course_name_japanese'];
@@ -57,5 +66,20 @@ class ChangePlanDetail
         $nextInput = $inputAccount !== 'premium' && $inputNextPlan === 'mega';
         return $currentInput || $nextInput;
 
+    }
+
+    private function isValidSmallPlan($inputNextPlan)
+    {
+        return $inputNextPlan === 'small';
+    }
+
+    private function isValidSamePlan($inputPlanName, $inputNextPlan)
+    {
+        return $inputPlanName === $inputNextPlan;
+    }
+
+    private function isValidMegaplanToNormalPlan($inputPlanName, $inputNextPlan)
+    {
+        return $inputPlanName === 'mega' && $inputNextPlan === 'normal';
     }
 }
