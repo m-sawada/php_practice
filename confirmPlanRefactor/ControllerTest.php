@@ -5,16 +5,15 @@ require_once('Controller.php');
 
 class ControllerTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @test
+     */
     public function testGetAccountDetail()
     {
-        $getAccountDetail = new GetAccountDetail('premium');
+        $object = new GetAccountDetail('premium');
 
-        /** プレミアム会員へのお知らせ表示（正常） */
-        $this->assertEquals('お知らせ：【プレミアム会員の継続利用について】',$getAccountDetail->accountDetail());
+        $this->assertEquals('プレミアム会員', $object->accountDetail()->account());
+        $this->assertEquals("お知らせ：【プレミアム会員の継続利用について】\n", $object->accountDetail()->appeal());
 
-        /** 入力不正（異常） */
-        $this->assertEquals('不正な入力です。', $getAccountDetail->accountDetail());
     }
-
-
 }

@@ -12,36 +12,22 @@ class GetAccountDetail
         $this->inputAccount = $inputAccount;
     }
 
-
     /**
-     * @return string
+     * @return bool|Normal|Premium|richPremium
      */
     public function accountDetail()
     {
         if ($this->inputAccount === 'normal') {
-            $accountDetail = new Normal;
+            return new Normal;
         }
 
         if ($this->inputAccount === 'premium') {
-            $accountDetail = new Premium;
+            return new Premium;
         }
 
         if ($this->inputAccount === 'richPremium') {
-            $accountDetail = new richPremium;
+            return new richPremium;
         }
-
-        try {
-            if (!isset($accountDetail)) {
-                throw new Exception("不正な入力です。\n");
-            }
-
-            $account = $accountDetail->account();
-            $appeal = $accountDetail->appeal();
-
-            return "あなたは{$account}です。\n{$appeal}\n";
-
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        return false;
     }
 }
