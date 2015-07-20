@@ -9,10 +9,12 @@
       <library name="PHARS">
         <CLASSES>
           <root url="phar://$MODULE_DIR$/confirmPlan/vendor/composer.phar" />
+          <root url="phar://$MODULE_DIR$/confirmPlanRefactor/vendor/composer.phar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
           <root url="phar://$MODULE_DIR$/confirmPlan/vendor/composer.phar" />
+          <root url="phar://$MODULE_DIR$/confirmPlanRefactor/vendor/composer.phar" />
         </SOURCES>
       </library>
     </orderEntry>
