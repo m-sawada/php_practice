@@ -7,8 +7,10 @@ class MembersInformation
     {
         if ($inputAccount === 'normal') {
             return 'お知らせ：【プレミアム会員になりませんか】';
-        } else {
+        } elseif ($inputAccount === 'premium') {
             return 'お知らせ：【プレミアム会員の継続利用について】';
+        } else {
+            return '不正な入力です。';
         }
     }
 
