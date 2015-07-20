@@ -16,4 +16,18 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("お知らせ：【プレミアム会員の継続利用について】\n", $object->accountDetail()->appeal());
 
     }
+
+    /**
+     * @test
+     */
+    public function testGetPlanDetail()
+    {
+        $object = new GetPlanDetail('premium','mega');
+
+        $this->assertEquals('メガプラン',$object->planDetail()->planName());
+        $this->assertEquals('8000円',$object->planDetail()->price());
+        $this->assertEquals('7GB',$object->planDetail()->capacity());
+    }
+
+
 }

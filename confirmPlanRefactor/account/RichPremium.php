@@ -1,9 +1,10 @@
 <?php
+namespace Account;
 
-class Normal
+class RichPremium
 {
-    const ACCOUNT = 'ノーマル会員';
-    const APPEAL = "お知らせ：【プレミアム会員になりませんか】\n";
+    const ACCOUNT = 'プレミアム会員';
+    const APPEAL = "お知らせ：【リッチプレミアム会員の継続利用について】\n";
 
     /**
      * @return string
