@@ -28,6 +28,11 @@ class Model
             'course_name_japanese' => 'メガプラン',
             'price' => '8000',
             'capacity' => '7GB'
+        ],
+        'giga' => [
+            'course_name_japanese' => 'メガプラン',
+            'price' => '11000',
+            'capacity' => '9GB'
         ]
     ];
 

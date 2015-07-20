@@ -4,9 +4,9 @@ class PlanDetail
 {
 
     /**
-     * @param array $accounts
+     * @param array  $accounts
      * @param string $inputAccount
-     * @param array $plans
+     * @param array  $plans
      * @param string $inputPlanName
      * @return string
      */
@@ -15,7 +15,7 @@ class PlanDetail
         if (!$this->isValid($accounts, $inputAccount, $plans, $inputPlanName)) {
             return '不正な入力です。';
         }
-        if ($this->isValidMegaPlan($inputAccount, $inputPlanName)){
+        if ($this->isValidMegaPlan($inputAccount, $inputPlanName)) {
             return 'メガプランはプレミアム会員のみです';
         }
 
@@ -23,11 +23,14 @@ class PlanDetail
         $price = $plans[$inputPlanName]['price'];
         $capacity = $plans[$inputPlanName]['capacity'];
 
-        if ($inputAccount === 'premium' && $inputPlanName === 'mega') {
+        if ($inputAccount === 'premium' && $inputPlanName === 'mega' && $inputPlanName === 'richPremium') {
             return "選択したのは $course_name_japanese で月 $price 円、容量は $capacity です。";
         } elseif ($inputAccount === 'premium') {
             $premiumPrice = $price - '1000';
             return "選択したのは $course_name_japanese で月 $premiumPrice 円、容量は $capacity です。";
+        } elseif ($inputAccount === 'richPremium') {
+            $richPremiumPrice = $price - '2000';
+            return "選択したのは $course_name_japanese で月 $richPremiumPrice 円、容量は $capacity です。";
         } else {
             return "選択したのは $course_name_japanese で月 $price 円、容量は $capacity です。";
         }
@@ -35,9 +38,9 @@ class PlanDetail
     }
 
     /**
-     * @param array $accounts
+     * @param array  $accounts
      * @param string $inputAccount
-     * @param array $plans
+     * @param array  $plans
      * @param string $inputPlanName
      * @return bool
      */
