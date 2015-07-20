@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . '/Plan/Small.php';
 require_once dirname(__FILE__) . '/Plan/Normal.php';
+require_once dirname(__FILE__) . '/Plan/Large.php';
 require_once dirname(__FILE__) . '/Plan/Mega.php';
 require_once dirname(__FILE__) . '/Plan/Giga.php';
 
@@ -27,12 +28,16 @@ class GetPlanDetail
             return new Plan\Normal($this->inputAccount);
         }
 
+        if ($this->currentPlan === 'large') {
+            return new Plan\Large($this->inputAccount);
+        }
+
         if ($this->currentPlan === 'mega') {
-            return new \Plan\Mega($this->inputAccount);
+            return new Plan\Mega($this->inputAccount);
         }
 
         if ($this->currentPlan === 'giga') {
-            return new \Plan\Giga($this->inputAccount);
+            return new Plan\Giga($this->inputAccount);
         }
 
         return false;

@@ -1,13 +1,25 @@
 <?php
 namespace Plan;
 
-class Small
+class Large
 {
     const PLAN_NAME = 'ラージプラン';
     const NORMAL_PRICE = '7000円';
     const PREMIUM_PRICE = '6000円';
     const RICH_PREMIUM_PRICE = '5000円';
     const CAPACITY = '5GB';
+
+    private $account;
+
+    public function __construct($account)
+    {
+        $this->account = $account;
+    }
+
+    public function planCaution()
+    {
+        return;
+    }
 
     /**
      * @return string
@@ -20,25 +32,15 @@ class Small
     /**
      * @return string
      */
-    public function normalPrice()
+    public function price()
     {
-        return self::NORMAL_PRICE;
-    }
-
-    /**
-     * @return string
-     */
-    public function premiumPrice()
-    {
-        return self::PREMIUM_PRICE;
-    }
-
-    /**
-     * @return string
-     */
-    public function richPremiumPrice()
-    {
-        return self::RICH_PREMIUM_PRICE;
+        if ($this->account === 'richPremium') {
+            return self::RICH_PREMIUM_PRICE;
+        } elseif ($this->account === 'premium') {
+            return self::PREMIUM_PRICE;
+        } else {
+            return self::NORMAL_PRICE;
+        }
     }
 
     /**
@@ -48,5 +50,4 @@ class Small
     {
         return self::CAPACITY;
     }
-
 }

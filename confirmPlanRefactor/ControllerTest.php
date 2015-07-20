@@ -22,11 +22,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPlanDetail()
     {
-        $object = new GetPlanDetail('premium','mega');
+        $object = new GetPlanDetail('premium', 'mega');
 
-        $this->assertEquals('メガプラン',$object->planDetail()->planName());
-        $this->assertEquals('8000円',$object->planDetail()->price());
-        $this->assertEquals('7GB',$object->planDetail()->capacity());
+        $this->assertEquals('メガプラン', $object->planDetail()->planName());
+        $this->assertEquals('8000円', $object->planDetail()->price());
+        $this->assertEquals('7GB', $object->planDetail()->capacity());
     }
 
 

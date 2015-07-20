@@ -3,11 +3,12 @@ namespace Plan;
 
 class Giga
 {
-    const PLAN_NAME = 'スモールプラン';
+    const PLAN_NAME = 'ギガプラン';
     const NORMAL_PRICE = '11000円';
     const PREMIUM_PRICE = '10000円';
     const RICH_PREMIUM_PRICE = '9000円';
     const CAPACITY = '9GB';
+    const PLAN_CAUTION = "ギガプランはリッチプレミアム会員のみです。\n";
 
     private $account;
 
@@ -18,7 +19,7 @@ class Giga
 
     public function planCaution()
     {
-        return;
+        return ($this->account !== 'richPremium') ? self::PLAN_CAUTION : false;
     }
 
     /**
