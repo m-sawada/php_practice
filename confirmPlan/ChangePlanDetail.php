@@ -21,7 +21,7 @@ class ChangePlanDetail
         if ($this->isValidSmallPlan($inputNextPlan)) {
             return " $inputPlanName からスモールプランへの変更は不可能です。";
         }
-        if($this->isValidGigaPlan($inputPlanName,$inputNextPlan)){
+        if ($this->isValidGigaPlan($inputAccount, $inputPlanName, $inputNextPlan)) {
             return "$inputPlanName からギガプランへの変更は不可能です。";
         }
         if ($this->isValidSamePlan($inputPlanName, $inputNextPlan)) {
@@ -94,8 +94,16 @@ class ChangePlanDetail
         return $inputPlanName === 'mega' && $inputNextPlan === 'normal';
     }
 
-    private function isValidGigaPlan($inputPlanName, $inputNextPlan)
+    private function isValidGigaPlan($inputAccount, $inputPlanName, $inputNextPlan)
     {
-        return $inputPlanName !== 'mega' && $inputNextPlan === 'giga';
+        if ($inputNextPlan !== 'giga') {
+            return false;
+        }
+
+        if ($inputAccount === 'richPremium') {
+            return $inputPlanName !== 'mega';
+        }
+
+        return false;
     }
 }
