@@ -6,7 +6,7 @@ require_once('ChangePlanDetail.php');
 
 class Model
 {
-    private $accounts = ['premium', 'normal'];
+    private $accounts = ['premium', 'normal', 'richPremium'];
 
     private $plans = [
         'small' => [
@@ -30,7 +30,7 @@ class Model
             'capacity' => '7GB'
         ],
         'giga' => [
-            'course_name_japanese' => 'メガプラン',
+            'course_name_japanese' => 'ギガプラン',
             'price' => '11000',
             'capacity' => '9GB'
         ]

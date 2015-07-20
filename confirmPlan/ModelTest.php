@@ -33,7 +33,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('メガプランはプレミアム会員のみです', $object->getChangePlanDetail('normal', 'small', 'mega'));
 
         /** メガプラン→ギガプランへ変更した場合の表示（正常） */
-        $this->assertEquals('メガプランからギガプランに変更しました。選択したのはギガプランで月9000円、容量は9GBです。', $object->getChangePlanDetail('richPremium', 'mega', 'giga'));
+        $this->assertEquals(' メガプラン から ギガプラン に変更しました。選択したのは ギガプラン で月 9000 円、容量は 9GB です。', $object->getChangePlanDetail('richPremium', 'mega', 'giga'));
 
         /** スモールプランは受付停止中なのでプラン変更不可（正常） */
         $this->assertEquals(' large からスモールプランへの変更は不可能です。', $object->getChangePlanDetail('premium', 'large', 'small'));
@@ -45,10 +45,10 @@ class ModelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('メガプランからノーマルプランへの変更は不可能です。', $object->getChangePlanDetail('premium', 'mega', 'normal'));
 
         /** メガプランからしかギガプランには変更できない（正常） */
-        $this->assertEquals(' largeからギガプランへの変更は不可能です。', $object->getChangePlanDetail('richPremium', 'large', 'giga'));
+        $this->assertEquals('large からギガプランへの変更は不可能です。', $object->getChangePlanDetail('richPremium', 'large', 'giga'));
 
         /** ギガプランからはスモールプラン以外へ変更できる（正常） */
-        $this->assertEquals(' ギガプランからノーマルプランへの変更は不可能です。', $object->getChangePlanDetail('richPremium', 'giga', 'normal'));
+        $this->assertEquals(' ギガプラン から ノーマルプラン に変更しました。選択したのは ノーマルプラン で月 3000 円、容量は 3GB です。', $object->getChangePlanDetail('richPremium', 'giga', 'normal'));
 
         /** 入力不正（異常） */
         $this->assertEquals('不正な入力です。', $object->getChangePlanDetail('test', 'test', 'test'));

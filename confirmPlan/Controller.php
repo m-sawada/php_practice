@@ -7,11 +7,11 @@ echo 'your account? normal/premium/richPremium :';
 
 $inputAccount = trim(fgets(STDIN));
 
-echo 'current plan? small/normal/large(/mega):';
+echo 'current plan? small/normal/large(/mega)(/giga):';
 
 $inputPlan = trim(fgets(STDIN));
 
-echo 'next plan? small/normal/large(/mega):';
+echo 'next plan? small/normal/large(/mega)(/giga):';
 
 $inputChangePlan = trim(fgets(STDIN));
 

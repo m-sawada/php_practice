@@ -3,9 +3,9 @@
 class ChangePlanDetail
 {
     /**
-     * @param array $accounts
+     * @param array  $accounts
      * @param string $inputAccount
-     * @param array $plans
+     * @param array  $plans
      * @param string $inputPlanName
      * @param string $inputNextPlan
      * @return string
@@ -15,16 +15,19 @@ class ChangePlanDetail
         if (!$this->isValid($accounts, $inputAccount, $plans, $inputPlanName)) {
             return '不正な入力です。';
         }
-        if ($this->isValidMegaPlan($inputAccount, $inputPlanName, $inputNextPlan)){
+        if ($this->isValidMegaPlan($inputAccount, $inputNextPlan)) {
             return 'メガプランはプレミアム会員のみです';
         }
         if ($this->isValidSmallPlan($inputNextPlan)) {
             return " $inputPlanName からスモールプランへの変更は不可能です。";
         }
+        if($this->isValidGigaPlan($inputPlanName,$inputNextPlan)){
+            return "$inputPlanName からギガプランへの変更は不可能です。";
+        }
         if ($this->isValidSamePlan($inputPlanName, $inputNextPlan)) {
             return " $inputPlanName から $inputNextPlan への変更は不可能です。";
         }
-        if ($this->isValidMegaplanToNormalPlan($inputPlanName, $inputNextPlan)){
+        if ($this->isValidMegaplanToNormalPlan($inputPlanName, $inputNextPlan)) {
             return "メガプランからノーマルプランへの変更は不可能です。";
         }
 
@@ -33,10 +36,13 @@ class ChangePlanDetail
         $price = $plans[$inputNextPlan]['price'];
         $capacity = $plans[$inputNextPlan]['capacity'];
 
-        if ($inputAccount === 'premium' && $inputNextPlan === 'mega') {
+        if ($inputAccount === 'premium' && $inputNextPlan === 'mega' && $inputAccount === 'richPremium') {
             return " $current_course_name_japanese から $next_course_name_japanese に変更しました。選択したのは $next_course_name_japanese で月 $price 円、容量は $capacity です。";
         } elseif ($inputAccount === 'premium') {
             $premiumPrice = $price - '1000';
+            return " $current_course_name_japanese から $next_course_name_japanese に変更しました。選択したのは $next_course_name_japanese で月 $premiumPrice 円、容量は $capacity です。";
+        } elseif ($inputAccount === 'richPremium') {
+            $premiumPrice = $price - '2000';
             return " $current_course_name_japanese から $next_course_name_japanese に変更しました。選択したのは $next_course_name_japanese で月 $premiumPrice 円、容量は $capacity です。";
         } else {
             return " $current_course_name_japanese から $next_course_name_japanese に変更しました。選択したのは $next_course_name_japanese で月 $price 円、容量は $capacity です。";
@@ -46,9 +52,9 @@ class ChangePlanDetail
 
 
     /**
-     * @param array $accounts
+     * @param array  $accounts
      * @param string $inputAccount
-     * @param array $plans
+     * @param array  $plans
      * @param string $inputPlanName
      * @return bool
      */
@@ -60,11 +66,16 @@ class ChangePlanDetail
         return $validInputAccount && $validInputName;
     }
 
-    private function isValidMegaPlan($inputAccount, $inputPlanName, $inputNextPlan)
+    /**
+     * @param string $inputAccount
+     * @param string $inputNextPlan
+     * @return bool
+     */
+    private function isValidMegaPlan($inputAccount, $inputNextPlan)
     {
-        $currentInput = $inputAccount !== 'premium' && $inputPlanName === 'mega';
-        $nextInput = $inputAccount !== 'premium' && $inputNextPlan === 'mega';
-        return $currentInput || $nextInput;
+        $isValidMegaPlanAccounts = ['premium', 'richPremium'];
+
+        return ($inputNextPlan === 'mega' && in_array($inputAccount, $isValidMegaPlanAccounts) === false) ? true : false;
 
     }
 
@@ -81,5 +92,10 @@ class ChangePlanDetail
     private function isValidMegaplanToNormalPlan($inputPlanName, $inputNextPlan)
     {
         return $inputPlanName === 'mega' && $inputNextPlan === 'normal';
+    }
+
+    private function isValidGigaPlan($inputPlanName, $inputNextPlan)
+    {
+        return $inputPlanName !== 'mega' && $inputNextPlan === 'giga';
     }
 }
