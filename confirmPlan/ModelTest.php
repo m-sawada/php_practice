@@ -1,6 +1,6 @@
 <?php
-    require_once(dirname(__FILE__) .'/vendor/autoload.php');
-    require_once('Model.php');
+require_once(dirname(__FILE__) . '/vendor/autoload.php');
+require_once('Model.php');
 
 
 class ModelTest extends PHPUnit_Framework_TestCase
@@ -18,5 +18,31 @@ class ModelTest extends PHPUnit_Framework_TestCase
         /** 入力不正（異常） */
         $this->assertEquals('不正な入力です。', $object->getMembersInformation('test')->memberInformation('test'));
 
+    }
+
+    public function testGetChangePlanDetail()
+    {
+        $object = new Model;
+
+        /** ノーマル会員が、スモールプラン→ラージプランに変更した場合の表示(正常) */
+        $this->assertEquals(' スモールプラン から ラージプラン に変更しました。選択したのは ラージプラン で月 7000 円、容量は 5GB です。', $object->getChangePlanDetail('normal', 'small', 'large'));
+
+        /** プレミアム会員が、スモールプラン→ラージプランに変更した場合の表示(正常) */
+        $this->assertEquals(' スモールプラン から ラージプラン に変更しました。選択したのは ラージプラン で月 6000 円、容量は 5GB です。', $object->getChangePlanDetail('premium', 'small', 'large'));
+
+        /** ノーマル会員が、スモールプラン→メガプランに変更した場合の表示(正常) */
+        $this->assertEquals('メガプランはプレミアム会員のみです', $object->getChangePlanDetail('normal', 'small', 'mega'));
+
+        /** スモールプランは受付停止中なのでプラン変更不可（正常） */
+        $this->assertEquals(' large からスモールプランへの変更は不可能です。', $object->getChangePlanDetail('premium', 'large', 'small'));
+
+        /** 同じプランへのプラン変更不可（正常） */
+        $this->assertEquals(' large から large への変更は不可能です。', $object->getChangePlanDetail('premium', 'large', 'large'));
+
+        /** メガプラン→ノーマルプランへの変更不可 */
+        $this->assertEquals('メガプランからノーマルプランへの変更は不可能です。', $object->getChangePlanDetail('premium', 'mega', 'normal'));
+
+        /** 入力不正（異常） */
+        $this->assertEquals('不正な入力です。', $object->getChangePlanDetail('test', 'test', 'test'));
     }
 }
